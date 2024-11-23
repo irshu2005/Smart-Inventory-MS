@@ -144,7 +144,7 @@ public class ChangePasswordPanel extends AbstractFunctionPanel {
             lus = new LoginUserServiceImpl();
             LoginUser user = LoginUserServiceImpl.getLoginUser(userName.getText().trim(), passWord.getText().trim());
             if (user == null) {
-                JOptionPane.showMessageDialog(null, "Original Username Password Error");
+                JOptionPane.showMessageDialog(null, "Original Username Password Error!!");
                 passWord.setText("");
                 userName.requestFocus();
                 return;
@@ -154,11 +154,11 @@ public class ChangePasswordPanel extends AbstractFunctionPanel {
             // finally change password/username
             LoginUserServiceImpl.changeLogin(txtNewUsrName.getText().trim(), txtNewpass.getText().trim());
 
-            JOptionPane.showMessageDialog(null, "Username/Password Changed Successfully\n New UserName is " + txtNewUsrName.getText().trim());
+            JOptionPane.showMessageDialog(null, "Username/Password Changed Successfully!\n New UserName is- " + txtNewUsrName.getText().trim());
             clearAll();
         } catch (Exception e1) {
             e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DB Connection Error");
+            JOptionPane.showMessageDialog(null, "DB Connection Error!");
         }
 
     }

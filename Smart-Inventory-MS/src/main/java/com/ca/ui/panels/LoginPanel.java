@@ -116,14 +116,14 @@ public class LoginPanel extends AbstractFunctionPanel {
             if (user != null) {
                 AppFrame.loginSuccess();
             } else {
-                JOptionPane.showMessageDialog(null, "Username password error");
+                JOptionPane.showMessageDialog(null, "Username password error!");
                 passWord.setText("");
                 userName.requestFocus();
             }
 
         } catch (Exception e1) {
             e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "DB Connection Error");
+            JOptionPane.showMessageDialog(null, "DB Connection Error!");
         }
 
     }

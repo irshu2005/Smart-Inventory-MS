@@ -273,7 +273,7 @@ public class UnitsStringPanel extends AbstractFunctionPanel {
             editingPrimaryId = -1;
             if (brsL == null || brsL.size() == 0) {
                 if (showSize0Error) {
-                    JOptionPane.showMessageDialog(null, "No Records Found");
+                    JOptionPane.showMessageDialog(null, "No Records Found!");
                 }
             }
             showRecordsinGrid(brsL);

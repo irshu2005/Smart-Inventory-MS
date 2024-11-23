@@ -22,10 +22,9 @@ import java.util.List;
 /**
  * com.gt.uilib.inputverifier-Validator.java<br/>
  *
- * @author Ganesh Tiwari @@ gtiwari333@gmail.com <br/>
- * Created on : Mar 19, 2012<br/>
- * Copyright : <a
- * href="http://ganeshtiwaridotcomdotnp.blogspot.com">Ganesh Tiwari </a>
+ * @author Irshad Ahamad @@ irshu79054@gmail.com <br/>
+ * Created on : Nov 15, 2024<br/>
+ * IRSHAD  </a>
  */
 public class Validator {
 

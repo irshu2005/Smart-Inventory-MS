@@ -273,7 +273,7 @@ public class CategoryPanel extends AbstractFunctionPanel {
         sp8.setText(bro.getSpecification8());
         sp9.setText(bro.getSpecification9());
         sp10.setText(bro.getSpecification10());
-        System.out.println(bro.getCategoryType() + " TYPE_KHARCHA_HUNE");
+        System.out.println(bro.getCategoryType() + " It's Over!!");
         // type
         if (bro.getCategoryType() == Category.TYPE_NON_RETURNABLE) {
             rdbtnNonReturnable.setSelected(true);
@@ -333,7 +333,7 @@ public class CategoryPanel extends AbstractFunctionPanel {
                     newBo.setdFlag(1);
                     DBUtils.saveOrUpdate(newBo);
                 }
-                JOptionPane.showMessageDialog(null, "Saved Successfully");
+                JOptionPane.showMessageDialog(null, "Saved Successfully!!");
                 changeStatus(Status.READ);
                 UIUtils.clearAllFields(upperPane);
                 readAndShowAll(false);
@@ -341,7 +341,7 @@ public class CategoryPanel extends AbstractFunctionPanel {
                 handleDBError(e);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Enter Properly");
+            JOptionPane.showMessageDialog(null, "Enter Properly!!");
         }
     }
 

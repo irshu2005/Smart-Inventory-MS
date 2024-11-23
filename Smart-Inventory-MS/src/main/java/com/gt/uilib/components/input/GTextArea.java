@@ -31,7 +31,7 @@ public class GTextArea extends JScrollPane {
 
     public static void makeUI() {
 
-        JFrame frame = new JFrame("Adventure in Nepal - Combo Test");
+        JFrame frame = new JFrame("Adventure in Manali - Combo Test");
         frame.getContentPane().add(new GTextArea(2, 10));
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

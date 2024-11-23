@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class StrConstants {
     public static final String APP_TITLE = "Smart Inventory Mgmt System";
-    public static final String COMPANY_NAME = "A Company";
-    public static final String DEPARTMENT = "Department";
+    public static final String COMPANY_NAME = "The Power Minders";
+    public static final String DEPARTMENT = "Computer Science & Engineering";
 
     /**
      * @return map of all declared static final fields, to be used by @{@link com.gt.common.ResourceManager}

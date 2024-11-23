@@ -231,7 +231,7 @@ public class ItemEntryPanel extends AbstractFunctionPanel {
             JOptionPane.showMessageDialog(null, "Deleted");
             readAndShowAll(false);
         } catch (Exception e) {
-            System.out.println("deleteSelectedBranchOffice");
+            System.out.println("DeleteSelectedBranchOffice");
             handleDBError(e);
         }
     }
