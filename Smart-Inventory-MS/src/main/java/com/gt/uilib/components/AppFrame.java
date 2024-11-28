@@ -227,16 +227,40 @@ public class AppFrame extends JFrame {
         if (toolBarPanel == null) {
             toolBarPanel = new JPanel();
             toolBarPanel.setLayout(new BorderLayout(20, 10));
+            toolBarPanel.setBackground(new Color(247, 255, 162));
 
             List<JLabel> buttons = new ArrayList<>();
-            buttons.add(ActionButton.create("HOME", "home", com.ca.ui.panels.HomeScreenPanel.class.getName()));
-            buttons.add(ActionButton.create("Stock Query", "find", com.ca.ui.panels.StockQueryPanel.class.getName()));
-            buttons.add(ActionButton.create("Item Entry", "itementry", com.ca.ui.panels.ItemEntryPanel.class.getName()));
-            buttons.add(ActionButton.create("Transfer", "itemtransfer", com.ca.ui.panels.ItemTransferPanel.class.getName()));
-            buttons.add(ActionButton.create("Return", "return", com.ca.ui.panels.ItemReturnPanel.class.getName()));
+            Font customFont = new Font("Arial", Font.BOLD | Font.ITALIC, 16);
+
+            JLabel homeButton = ActionButton.create("HOME", "home", com.ca.ui.panels.HomeScreenPanel.class.getName());
+            homeButton.setFont(customFont);
+            buttons.add(homeButton);
+
+            JLabel stockQueryButton = ActionButton.create("Stock Query", "find", com.ca.ui.panels.StockQueryPanel.class.getName());
+            stockQueryButton.setFont(customFont);
+            buttons.add(stockQueryButton);
+
+            JLabel itemEntryButton = ActionButton.create("Item Entry", "itementry", com.ca.ui.panels.ItemEntryPanel.class.getName());
+            itemEntryButton.setFont(customFont);
+            buttons.add(itemEntryButton);
+
+            JLabel transferButton = ActionButton.create("Transfer", "itemtransfer", com.ca.ui.panels.ItemTransferPanel.class.getName());
+            transferButton.setFont(customFont);
+            buttons.add(transferButton);
+
+            JLabel returnButton = ActionButton.create("Return", "return", com.ca.ui.panels.ItemReturnPanel.class.getName());
+            returnButton.setFont(customFont);
+            buttons.add(returnButton);
+
             buttons.add(new JLabel());
-            buttons.add(LogOutButton.create("Logout", "logout", com.ca.ui.panels.HomeScreenPanel.class.getName()));
-            buttons.add(ExitButton.create("Exit", "exit", com.ca.ui.panels.HomeScreenPanel.class.getName()));
+
+            JLabel logoutButton = LogOutButton.create("Logout", "logout", com.ca.ui.panels.HomeScreenPanel.class.getName());
+            logoutButton.setFont(customFont);
+            buttons.add(logoutButton);
+
+            JLabel exitButton = ExitButton.create("Exit", "exit", com.ca.ui.panels.HomeScreenPanel.class.getName());
+            exitButton.setFont(customFont);
+            buttons.add(exitButton);
 
             toolBarPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
             toolBarPanel.setPreferredSize(new Dimension(getWidth(), 80));

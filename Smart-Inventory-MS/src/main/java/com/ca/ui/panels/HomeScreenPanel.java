@@ -15,8 +15,11 @@ public class HomeScreenPanel extends AbstractFunctionPanel {
 
     public HomeScreenPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        setBackground(new Color(191, 194, 194));
+        
 
         JPanel panel_4 = new JPanel();
+        panel_4.setBackground(new Color(191, 194, 194));
         add(panel_4);
         panel_4.setLayout(new FormLayout(new ColumnSpec[]{
                 FormFactory.RELATED_GAP_COLSPEC,
@@ -52,11 +55,14 @@ public class HomeScreenPanel extends AbstractFunctionPanel {
                         FormFactory.DEFAULT_ROWSPEC,}));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(ResourceManager.getImageIcon("logo2.png"));
-        panel_4.add(lblNewLabel, "8, 8, 1, 5");
+        ImageIcon originalIcon = ResourceManager.getImageIcon("logo2.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); // Set desired width and height
+        ImageIcon resizedIcon = new ImageIcon(scaledImage);
+        lblNewLabel.setIcon(resizedIcon);
+        panel_4.add(lblNewLabel, "8, 8, 1, 6");
 
         JLabel lblCompany = new JLabel(ResourceManager.getString(StrConstants.COMPANY_NAME));
-        lblCompany.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblCompany.setFont(new Font("Tahoma", Font.BOLD, 5));
         panel_4.add(lblCompany, "10, 8, default, top");
 
         JLabel lblComm = new JLabel(ResourceManager.getString(StrConstants.DEPARTMENT));
@@ -67,8 +73,19 @@ public class HomeScreenPanel extends AbstractFunctionPanel {
         lblInventory.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel_4.add(lblInventory, "10, 12");
 
-        JLabel lblWelcome = new JLabel("Welcome, Please use toolbar and menus to proceed. \nIf you are running the app for the first time, make sure to enter initial data from Entry -> Initial Records menu ");
-        lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        //JLabel lblWelcome = new JLabel("Welcome, Please use toolbar and menus to proceed. \nIf you are running the app for the first time, make sure to enter initial data from Entry -> Initial Records menu ");
+       // lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+       // panel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
+      //  panel_4.add(lblWelcome, "10, 16, left, default");
+        JLabel lblWelcome = new JLabel("<html>"
+                + "<span style='font-family:Comic Sans MS ; font-size:25px; font-weight:bolder; font-style:italic;'>"
+                + "Welcome, Please use toolbar and menus to proceed."
+                + "</span><br><br>"
+                + "<span style='font-family:Verdana; font-size:15px;'>"
+                + "If you are running the app for the first time, make sure to enter initial data from Entry -> Initial Records menu"
+                + "</span>"
+                + "</html>");
+        lblWelcome.setFont(new Font("Courier New", Font.BOLD|Font.ITALIC, 12));
         panel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
         panel_4.add(lblWelcome, "10, 16, left, default");
 

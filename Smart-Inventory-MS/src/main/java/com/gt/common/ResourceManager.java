@@ -1,6 +1,7 @@
 package com.gt.common;
 
 import com.gt.common.constants.StrConstants;
+
 import com.gt.common.utils.CryptographicUtil;
 
 import javax.imageio.ImageIO;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +35,44 @@ public class ResourceManager {
      * @param key the key of the string constant.
      * @return the corresponding value or null if not found.
      */
+    
+    public static BufferedImage resizeImage(BufferedImage originalImage, int width, int height) {
+        BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, width, height, null);
+        g.dispose(); // Release resources
+        return resizedImage;
+    }
+    
+    public static void resizeAndDisplay(String imageName, int width, int height) {
+        try {
+            BufferedImage originalImage = readImage(imageName); // Use existing method
+            if (originalImage == null) {
+                System.err.println("Failed to load image: " + imageName);
+                return;
+            }
+            BufferedImage resizedImage = resizeImage(originalImage, width, height);
+
+            // Display the resized image in a JFrame
+            ImageIcon icon = new ImageIcon(resizedImage);
+            JFrame frame = new JFrame("Resized Image: " + imageName);
+            JLabel label = new JLabel(icon);
+            frame.add(label);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+
+            // Optionally save the resized image
+            File outputFile = new File("resized-" + imageName);
+            ImageIO.write(resizedImage, "png", outputFile);
+            System.out.println("Resized image saved as: " + outputFile.getAbsolutePath());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
     public static synchronized String getString(String key) {
         if (stringConstantsMap == null) {
             try {
@@ -123,6 +163,8 @@ public class ResourceManager {
      */
     public static void main(String[] args) {
         String[] testImages = {"logout-on.png", "nonexistent.png"};
+        resizeAndDisplay("logout-on.png", 50, 50); // Resize to 100x100
+        resizeAndDisplay("nonexistent.png", 200, 200);
         for (String img : testImages) {
             ImageIcon icon = getImageIcon(img);
             if (icon.getIconWidth() == -1) {

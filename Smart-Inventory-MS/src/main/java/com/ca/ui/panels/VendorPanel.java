@@ -17,6 +17,11 @@ import org.apache.commons.lang3.SystemUtils;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+
 import java.awt.*;
 import java.util.List;
 
@@ -43,6 +48,7 @@ public class VendorPanel extends AbstractFunctionPanel {
         /*
           all gui components added from here;
          */
+    	setBackground(new Color(210, 189, 252));
         JSplitPane splitPane = new JSplitPane();
         splitPane.setContinuousLayout(true);
         splitPane.setResizeWeight(0.4);
@@ -53,6 +59,26 @@ public class VendorPanel extends AbstractFunctionPanel {
         /*
           never forget to call after setting up UI
          */
+        Font buttonFont = new Font("Arial", Font.BOLD, 12);
+        btnReadAll.setFont(buttonFont);
+        btnNew.setFont(buttonFont);
+        btnSave.setFont(buttonFont);
+        btnCancel.setFont(buttonFont);
+        
+        btnReadAll.setPreferredSize(new Dimension(120, 40));
+        btnNew.setPreferredSize(new Dimension(120, 40));
+        btnSave.setPreferredSize(new Dimension(120, 40));
+        btnCancel.setPreferredSize(new Dimension(120, 40));
+
+        btnReadAll.setBackground(new Color(70, 130, 180));  // Steel Blue
+        btnNew.setBackground(new Color(34, 139, 34));  // Forest Green
+        btnSave.setBackground(new Color(0, 191, 255));  // Deep Sky Blue
+        btnCancel.setBackground(new Color(255, 69, 0));  // Red-Orange
+        
+        btnReadAll.setForeground(Color.BLACK);
+        btnNew.setForeground(Color.BLUE);
+        btnSave.setForeground(Color.BLACK);
+        btnCancel.setForeground(Color.BLACK);
         init();
     }
 
@@ -102,12 +128,20 @@ public class VendorPanel extends AbstractFunctionPanel {
             buttonPanel.add(btnNew);
 
             JButton btnDeleteThis = new JButton("Delete This");
+            btnDeleteThis.setForeground(Color.BLACK);
+            btnDeleteThis.setBackground(new Color(255, 69, 0));
+            btnDeleteThis.setPreferredSize(new Dimension(120, 40));
+            btnDeleteThis.setFont(new Font("Arial", Font.BOLD, 12));
             btnDeleteThis.addActionListener(e -> {
                 if (editingPrimaryId > 0)
                     handleDeleteAction();
             });
 
             JButton btnModify = new JButton("Modify");
+            btnModify.setForeground(Color.BLACK);
+            btnModify.setBackground(new Color(255, 69, 0));
+            btnModify.setPreferredSize(new Dimension(120, 40));
+            btnModify.setFont(new Font("Arial", Font.BOLD, 12));
             btnModify.addActionListener(e -> {
                 if (editingPrimaryId > 0)
                     changeStatus(Status.MODIFY);
@@ -254,9 +288,12 @@ public class VendorPanel extends AbstractFunctionPanel {
     private JPanel getUpperFormPanel() {
         if (formPanel == null) {
             formPanel = new JPanel();
+            formPanel.setBackground(new Color(230, 240, 255));
 
             formPanel.setBorder(new TitledBorder(null, "Vendor Information",
-                    TitledBorder.LEADING, TitledBorder.TOP, null, null));
+                    TitledBorder.LEADING, TitledBorder.TOP,  new Font("Tahoma", Font.BOLD, 16), // Font for title
+                    Color.DARK_GRAY
+));
             formPanel.setBounds(10, 49, 474, 135);
             formPanel.setLayout(new FormLayout(new ColumnSpec[]{
                     FormFactory.RELATED_GAP_COLSPEC,
@@ -276,27 +313,50 @@ public class VendorPanel extends AbstractFunctionPanel {
                     FormFactory.RELATED_GAP_ROWSPEC,
                     FormFactory.DEFAULT_ROWSPEC,}));
 
+            Font labelFont = new Font("Arial", Font.BOLD, 14);
             JLabel lblN = new JLabel("Name");
+            lblN.setFont(labelFont);
             formPanel.add(lblN, "4, 2");
 
             nameFLD = new JTextField();
+            nameFLD.setFont(new Font("Courier New", Font.PLAIN, 14));
             formPanel.add(nameFLD, "8, 2, fill, default");
             nameFLD.setColumns(10);
 
             JLabel lblAddress = new JLabel("Address");
+            lblAddress.setFont(labelFont);
             formPanel.add(lblAddress, "4, 4, default, top");
 
             addressFLD = new GTextArea(5, 30);
             formPanel.add(addressFLD, "8, 4, fill, fill");
 
             JLabel lblPhoneNumber = new JLabel("Phone Number");
+            lblPhoneNumber.setFont(labelFont);
             formPanel.add(lblPhoneNumber, "4, 6");
 
             phoneNumberFLD = new JTextField();
             formPanel.add(phoneNumberFLD, "8, 6, fill, default");
             phoneNumberFLD.setColumns(10);
+            
+            // Add DocumentFilter to enforce 10-digit limit
+            ((AbstractDocument) phoneNumberFLD.getDocument()).setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                    if (string != null && string.matches("\\d*") && (fb.getDocument().getLength() + string.length() <= 10)) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+
+                @Override
+                public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                    if (text != null && text.matches("\\d*") && (fb.getDocument().getLength() - length + text.length() <= 10)) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+            });
 
             btnSave = new JButton("Save");
+            btnSave.setFont(new Font("Verdana", Font.BOLD, 18));
             btnSave.addActionListener(e -> {
                 btnSave.setEnabled(false);
                 handleSaveAction();
@@ -344,6 +404,7 @@ public class VendorPanel extends AbstractFunctionPanel {
     private JPanel getUpperSplitPane() {
         if (upperPane == null) {
             upperPane = new JPanel();
+            upperPane.setBackground(new Color(200, 255, 200));
             upperPane.setLayout(new BorderLayout(0, 0));
             upperPane.add(getUpperFormPanel(), BorderLayout.CENTER);
             upperPane.add(getButtonPanel(), BorderLayout.SOUTH);
@@ -354,6 +415,7 @@ public class VendorPanel extends AbstractFunctionPanel {
     private JPanel getLowerSplitPane() {
         if (lowerPane == null) {
             lowerPane = new JPanel();
+            lowerPane.setBackground(new Color(250, 250, 210));
             lowerPane.setLayout(new BorderLayout());
             dataModel = new EasyTableModel(header);
 

@@ -67,7 +67,7 @@ public class ChangePasswordPanel extends AbstractFunctionPanel {
                 FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,}));
 
         JLabel lblImg = new JLabel("img");
-        lblImg.setIcon(ResourceManager.getImageIcon("logo2.png"));
+        lblImg.setIcon(resizeIcon(ResourceManager.getImageIcon("logo2.png"), 10, 5));
         innerPanel.add(lblImg, "2, 6, 3, 5");
 
         JLabel lblTitile = new JLabel(ResourceManager.getString(StrConstants.COMPANY_NAME));
@@ -121,6 +121,16 @@ public class ChangePasswordPanel extends AbstractFunctionPanel {
         loginButton.addActionListener(e -> change());
         return fullPanel;
     }
+    
+    private Icon resizeIcon(Icon icon, int width, int height) {
+		// TODO Auto-generated method stub
+    	 if (icon instanceof ImageIcon) {
+    	        Image img = ((ImageIcon) icon).getImage();
+    	        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    	        return new ImageIcon(scaledImg);
+    	    }
+		return icon;
+	}
 
     private void clearAll() {
         UIUtils.clearAllFields(innerPanel);
