@@ -83,7 +83,9 @@ We welcome contributions! Please fork the repository and open a pull request wit
 
 ## Authors
 
-- irshu2005
+- Irshad Ahamad
+- Lavanya Jaiswal
+- Himani Aggarwal
 
 ---
 
